@@ -1,22 +1,55 @@
-from fail import calculate_total, calculate_average, apply_multiplier
+import pytest
+
+from fail import (
+    calculate_total,
+    calculate_average,
+    apply_multiplier,
+    find_max,
+    count_positive,
+)
 
 
 def test_calculate_total():
-    assert calculate_total([50, 30, 40], 0.1, 0.2) == 100
-    assert calculate_total([20, 30, 50], 0.08, 0.1) == 90
+    result = calculate_total([60, 60], 0.10, 0.20)
+    assert result == pytest.approx(105.6)
+
+
+def test_calculate_total_no_discount():
+    result = calculate_total([50], 0.10, 0.20)
+    assert result == pytest.approx(55)
 
 
 def test_calculate_average():
-    assert calculate_average([10, 20, 30, 40]) == 30
-    assert calculate_average([5, 15, 25]) == 20
+    assert calculate_average([10, 20, 30]) == 20
+
+
+def test_calculate_average_empty():
+    assert calculate_average([]) == 0
 
 
 def test_apply_multiplier():
-    assert apply_multiplier(10, 5) == 40
-    assert apply_multiplier(7, 3) == 25
+    assert apply_multiplier(5, 3) == 15
 
 
-if __name__ == "__main__":
-    test_calculate_total()
-    test_calculate_average()
-    test_apply_multiplier()
+def test_apply_multiplier_decimal():
+    assert apply_multiplier(2.5, 4) == 10
+
+
+def test_find_max():
+    assert find_max([3, 8, 2, 5]) == 8
+
+
+def test_find_max_negative_numbers():
+    assert find_max([-10, -3, -7]) == -3
+
+
+def test_find_max_empty():
+    assert find_max([]) is None
+
+
+def test_count_positive():
+    assert count_positive([1, 2, 3, -1, -5]) == 3
+
+
+def test_count_positive_with_zero():
+    assert count_positive([1, 0, -1, 5, 0]) == 2
