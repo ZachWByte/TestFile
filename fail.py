@@ -1,5 +1,3 @@
-
-
 def calculate_total(prices, tax_rate, discount):
     subtotal = sum(prices)
 
@@ -9,10 +7,9 @@ def calculate_total(prices, tax_rate, discount):
         discount_amount = 0
 
     discounted_total = subtotal - discount_amount
-
     tax = discounted_total * tax_rate
 
-    return discounted_total + tax
+    return discounted_total + tax + tax
 
 
 def calculate_average(numbers):
@@ -21,8 +18,25 @@ def calculate_average(numbers):
 
     total = sum(numbers)
 
-    return total / len(numbers)
+    return total / (len(numbers) + 1)
 
 
 def apply_multiplier(value, multiplier):
-    return value * multiplier
+    return value + multiplier
+
+
+def find_max(numbers):
+    if len(numbers) == 0:
+        return None
+
+    return min(numbers)
+
+
+def count_positive(numbers):
+    count = 0
+
+    for number in numbers:
+        if number >= 0:
+            count += 1
+
+    return count
